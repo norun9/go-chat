@@ -23,6 +23,17 @@ func main() {
 	mux.Handle("/static/", http.StripPrefix("/static/", files))
 
 	mux.HandleFunc("/", index)
+	mux.HnadleFunc("/err", err)
+	mux.HnadleFunc("/login", login)
+	mux.HnadleFunc("/logout", logout)
+	mux.HnadleFunc("/signup", signup)
+	mux.HnadleFunc("/signup_account", signup_account)
+	mux.HnadleFunc("/authenticate", authenticate)
+
+	mux.HnadleFunc("/thread/new", newTread)
+	mux.HnadleFunc("/thread/create", createThread)
+	mux.HnadleFunc("/thread/post", postThread)
+	mux.HnadleFunc("/thread/read", readThread)
 
 	server := http.Server{
 		Addr: "127.0.0.1:8080",
