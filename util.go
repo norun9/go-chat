@@ -13,4 +13,13 @@ import (
 	"strings"
 )
 
-func session
+func session(w http.ResponseWriter, r *http.Request)(sess data.Session, err errors){
+	cookie, err := r.Cookie("_coolie")
+	if err != nil{
+		sess = data.Session{Uuid: cookie.Value}
+		if ok, _ := sess.Check(); !ok {
+			err = errors.New("Invalid session")
+		}
+	}
+	return
+}
