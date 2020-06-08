@@ -12,13 +12,13 @@ type Thread struct {
 	CreatedAt time.Time
 }
 
-func Tread() (threads []Tread, err error){
+func Tread() (threads []Thread, err error){
 	rows, err := Db.Query("SELECT count(*) FROM posts where thread_id = $1", thread.Id)
 	if err != nil{
 		return
 	}
 	for rows.Next(){
-		th := new(Tread)
+		th := new(Thread)
 		if err = rows.Scan(th.Id, th.Uuid, th.Topic, th.UserId, th.CreateAt); err != nil{
 			return
 		}
