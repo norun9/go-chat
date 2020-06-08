@@ -2,7 +2,7 @@ package main
 
 import(
 	"net/http"
-	"html/template"
+	"github.com/mushahiroyuki/gowebprog/ch02/chitchat/data"
 )
 
 //func index(w http.ResponseWriter, r *http.Request){
@@ -29,7 +29,7 @@ import(
 //}
 
 func index(w http.ResponseWriter, r *http.Request){
-	threads, err := data.Treads(); if err == nil {
+	threads, err := data.Threads(); if err == nil {
 		_, err := session(w, r)
 		if err != nil {
 			generateHTML(w, threads, "layout", "public.navbar", "index")
