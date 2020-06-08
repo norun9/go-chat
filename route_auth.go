@@ -1,23 +1,22 @@
 package main
 
-import(
+import (
 	"net/http"
-	"testing"
 )
 
 func authenticate(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	user, _ := data.UserByEmail(r.PostFormValue("email"))
 	if user.Password == data.Encrypt(r.PostFormValue("password")){
-		session := user.CreateSession()
+		session := user.CreateSeesion()
 		cookie := http.Cookie{
-			Name: "_coolie",
-			Value: "session.Uuid",
+			Name: "_cookie",
+			Value: session.Uuid,
 			HttpOnly: true,
 		}
 		http.SetCookie(w, &cookie)
 		http.Redirect(w, r, "/", 302)
-	}else{
+	} else {
 		http.Redirect(w, r, "/login", 302)
 	}
 }
